@@ -1,0 +1,303 @@
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.header {
+  background: linear-gradient(135deg, #ff6b35, #f7931e, #8e44ad);
+  color: white;
+  padding: 20px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.headerBrand {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  color: #ff6b35;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.form {
+  padding: 0 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.input,
+.select {
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  background: white;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus,
+.select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.fingerprintSection {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin: 60px 0;
+  padding: 0 20px;
+}
+
+.fingerprintGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.fingerprintBox {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0.3;
+  transform: scale(0.95);
+}
+
+.fingerprintBox.active {
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.3);
+}
+
+.fingerprintBox:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.2);
+}
+
+.checkmark {
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.fingerprintButton {
+  background: none;
+  border: 2px solid #17a2b8;
+  color: #17a2b8;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.fingerprintButton:hover {
+  background: #17a2b8;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+.submitButton {
+  width: fit-content;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  padding: 16px 40px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 40px auto;
+  display: block;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+  background: linear-gradient(135deg, #0056b3, #004085);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+.fileInputWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.fileInput {
+  position: absolute;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.fileLabel {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  font-size: 16px;
+}
+
+.fileLabel:hover {
+  border-color: #007bff;
+}
+
+.browseButton {
+  background: #f8f9fa;
+  border: 1px solid #ccc;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-right: 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+.fileName {
+  color: #666;
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .formRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .fingerprintSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+
+  .form {
+    padding: 0 20px;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .fingerprintSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .fingerprintBox {
+    width: 100px;
+    height: 100px;
+  }
+
+  .checkmark {
+    font-size: 36px;
+  }
+
+  .title {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .headerBrand {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fingerprintSection {
+    grid-template-columns: 1fr;
+  }
+
+  .fingerprintBox {
+    width: 80px;
+    height: 80px;
+  }
+
+  .checkmark {
+    font-size: 28px;
+  }
+}
