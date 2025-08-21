@@ -210,7 +210,7 @@
 }
 
 /* Responsive Design */
-@media (min-width: 769px) {
+@media (min-width: 768.1px) {
   .contentWrapper {
     margin-left: 230px;
   }

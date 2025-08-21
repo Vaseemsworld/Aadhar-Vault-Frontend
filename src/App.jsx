@@ -15,6 +15,7 @@ import ProfileDashboard from "./pages/ProfileDashboard.jsx";
 import CreateOrder from "./pages/CreateOrder.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import Operators from "./pages/Operators.jsx";
+import FingerprintViewer from "./pages/FingerprintViewer.jsx";
 
 export default function App() {
   return (
@@ -38,6 +39,10 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route
+              path="/assign/:type/:orderId/fingerprints"
+              element={<FingerprintViewer />}
+            />
             {/* {/* Protected routes layout */}
             <Route element={<PrivateRoute />}>
               <Route element={<Layout />}>
@@ -46,7 +51,7 @@ export default function App() {
                 <Route path="/assign/" element={<AssignOrders />} />
                 <Route path="/entry-complaint/" element={<AssignOrders />} />
                 <Route path="/profile/" element={<ProfileDashboard />} />
-                <Route path="/create-order" element={<CreateOrder />} />
+                <Route path="/create-order/" element={<CreateOrder />} />
               </Route>
             </Route>
           </Routes>

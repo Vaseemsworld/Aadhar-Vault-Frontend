@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useMainContext } from "../context/MainContext";
 import api from "../utils/api";
+import { useAuth } from "../context/AuthContext";
 
 const columnConfig = {
   "Mobile Update": [
@@ -66,6 +67,7 @@ const highlightMatch = (text, query) => {
 };
 
 const DynamicTable = ({
+  orderType,
   data,
   columns,
   searchQuery,
@@ -74,6 +76,8 @@ const DynamicTable = ({
   onSort,
   onDeleteConfirm,
 }) => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [showDelete, setShowDelete] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
 
@@ -121,16 +125,21 @@ const DynamicTable = ({
         <thead>
           <tr>
             <th>#</th>
-            {columns.map((col) => (
-              <th
-                key={col.key}
-                onClick={() => onSort(col.key)}
-                style={{ cursor: "pointer" }}
-              >
-                {col.label}{" "}
-                {sortKey === col.key ? (sortOrder === "asc" ? "▲" : "▼") : ""}
-              </th>
-            ))}
+            {columns.map((col) => {
+              if (!user?.is_staff && col.key === "operator_username") {
+                return null;
+              }
+              return (
+                <th
+                  key={col.key}
+                  onClick={() => onSort(col.key)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {col.label}{" "}
+                  {sortKey === col.key ? (sortOrder === "asc" ? "▲" : "▼") : ""}
+                </th>
+              );
+            })}
             <th>Action</th>
           </tr>
         </thead>
@@ -140,6 +149,9 @@ const DynamicTable = ({
               <tr key={row.id || index}>
                 <td>{index + 1}</td>
                 {columns.map((col) => {
+                  if (!user?.is_staff && col.key === "operator_username") {
+                    return null;
+                  }
                   if (col.key === "operator_username") {
                     const bgColor = stringToColor(row[col.key] || "");
                     return (
@@ -173,6 +185,9 @@ const DynamicTable = ({
                     <button
                       className={`${styles.actionBtn} ${styles.BsFingerprint}`}
                       title="Fingerprint"
+                      onClick={() =>
+                        navigate(`/assign/${orderType}/${row.id}/fingerprints/`)
+                      }
                     >
                       <BsFingerprint />
                     </button>
@@ -227,6 +242,8 @@ const AssignOrders = () => {
     aadharno: "Aadhaar Number",
     aadharpdf: "Aadhaar PDF",
   };
+
+  //fetch orders
   useEffect(() => {
     const fetchOrders = async () => {
       const label = typeLabelMap[orderType?.toLowerCase()];
@@ -240,20 +257,24 @@ const AssignOrders = () => {
     };
     fetchOrders();
   }, [orderType, location.state]);
+
   // Clear state after loading once
   useEffect(() => {
     if (location.state?.scrollToNew) {
       navigate(location.pathname + location.search, { replace: true });
     }
   }, [location, navigate]);
+
   useEffect(() => {
     if (currentPath === "Assign") setTableHeading("Assign Orders");
     else if (currentPath === "Entry-complaint")
       setTableHeading("Entry Complaint");
   }, [currentPath]);
+
   const addOrder = (orderType) => {
     navigate(`/create-order?type=${orderType}`);
   };
+
   const filteredOrders = useMemo(() => {
     let result = [...orders];
     if (searchQuery.trim()) {
@@ -275,6 +296,7 @@ const AssignOrders = () => {
     }
     return result;
   }, [orders, searchQuery, sortKey, sortOrder]);
+
   const handleSort = (key) => {
     if (sortKey === key) {
       setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
@@ -283,6 +305,7 @@ const AssignOrders = () => {
       setSortOrder("asc");
     }
   };
+
   const handleDeleteOrder = async (orderId) => {
     try {
       await api.delete(`/orders/${orderId}/`);
@@ -292,6 +315,7 @@ const AssignOrders = () => {
       toast.error("Failed to delete order. Please try again.");
     }
   };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>{tableHeading}</h2>
@@ -315,6 +339,7 @@ const AssignOrders = () => {
       <div className={styles.tableWrapper}>
         {currentPath === "Assign" && (
           <DynamicTable
+            orderType={orderType}
             data={filteredOrders}
             columns={columnConfig[typeLabelMap[orderType?.toLowerCase()]] || []}
             searchQuery={searchQuery}
