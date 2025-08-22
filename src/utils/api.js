@@ -1,34 +1,31 @@
 import axios from "axios";
 
-// Get CSRF token from cookies
-export function getCookie(name) {
-  const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-  if (match) return match[2];
-}
+let csrfToken = "";
 
-// Automatically attach CSRF token to unsafe methods
-export async function fetchCSRF() {
+// Fetch CSRF token once at app startup
+export async function initCSRF() {
   const res = await axios.get(
     "https://aadhar-vault-backend.onrender.com/api/csrf/",
-    {
-      withCredentials: true,
-    }
+    { withCredentials: true }
   );
-  return res.data.csrfToken;
+  csrfToken = res.data.csrfToken;
 }
 
+// Axios instance
 const api = axios.create({
   baseURL: "https://aadhar-vault-backend.onrender.com/api/",
   withCredentials: true,
 });
 
+// Attach CSRF token to unsafe methods
 api.interceptors.request.use((config) => {
   const safeMethods = ["get", "head", "options", "trace"];
   if (!safeMethods.includes(config.method)) {
-    const csrfToken = getCookie("csrftoken") || fetchCSRF();
+    if (!csrfToken) {
+      throw new Error("CSRF token not initialized! Call initCSRF() first.");
+    }
     config.headers["X-CSRFToken"] = csrfToken;
   }
-
   return config;
 });
 

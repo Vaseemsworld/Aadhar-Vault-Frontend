@@ -16,8 +16,18 @@ import CreateOrder from "./pages/CreateOrder.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import Operators from "./pages/Operators.jsx";
 import FingerprintViewer from "./pages/FingerprintViewer.jsx";
+import { useEffect } from "react";
 
 export default function App() {
+  useEffect(() => {
+    // Initialize CSRF token at app startup
+    import("./utils/api").then(({ initCSRF }) => {
+      initCSRF().catch((error) => {
+        console.error("Failed to initialize CSRF token:", error);
+      });
+    });
+  }, []);
+
   return (
     <BrowserRouter>
       <MainProvider>
