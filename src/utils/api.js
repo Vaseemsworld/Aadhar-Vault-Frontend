@@ -8,15 +8,24 @@ export function getCookie(name) {
 
 const api = axios.create({
   baseURL: "https://aadhar-vault-backend.onrender.com/api/",
-  withCredentials: true, // Important
+  withCredentials: true,
 });
 
 // Automatically attach CSRF token to unsafe methods
-api.interceptors.request.use((config) => {
-  const csrfToken = getCookie("csrftoken");
+export async function fetchCSRF() {
+  const res = await axios.get(
+    "https://aadhar-vault-backend.onrender.com/api/csrf/",
+    {
+      withCredentials: true,
+    }
+  );
+  return res.data.csrfToken;
+}
 
+api.interceptors.request.use((config) => {
   const safeMethods = ["get", "head", "options", "trace"];
   if (!safeMethods.includes(config.method)) {
+    const csrfToken = getCookie("csrftoken") || fetchCSRF();
     config.headers["X-CSRFToken"] = csrfToken;
   }
 
