@@ -34,9 +34,9 @@ const ProfileDashboard = () => {
     }));
   };
 
-  // const handleUpdateProfile = () => {
-  //   console.log("Profile updated:", profileData);
-  // };
+  const handleUpdateProfile = () => {
+    // console.log("Profile updated:", profileData);
+  };
 
   useEffect(() => {
     const fetchProfile = async () => {
