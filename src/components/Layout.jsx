@@ -44,7 +44,6 @@ export default function Layout() {
     } else if (currentPath === "Operators") {
       setHeading("Operators");
     }
-    console.log("currentPath:", currentPath);
   }, [currentPath]);
 
   const getGreeting = () => {
