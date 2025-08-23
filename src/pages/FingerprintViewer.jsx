@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/FingerprintViewer.module.css";
 import {
   ChevronLeft,
@@ -6,20 +6,16 @@ import {
   ZoomIn,
   ZoomOut,
   RotateCcw,
-  ArrowBigLeft,
   ArrowLeft,
 } from "lucide-react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AadhaarLoader from "./Loader";
-import { useMainContext } from "../context/MainContext";
 import api from "../utils/api";
 
 function FingerprintViewer() {
-  const { currentPath } = useMainContext();
   const { type, orderId } = useParams();
   const navigate = useNavigate();
   const [fingerprints, setFingerprints] = useState({});
-  const [searchParams] = useSearchParams();
   const [index, setIndex] = useState(0);
   const [brightness, setBrightness] = useState(1);
   const [zoom, setZoom] = useState(0.8);
@@ -55,15 +51,14 @@ function FingerprintViewer() {
   }, [orderId]);
 
   if (loading) {
-    <AadhaarLoader />;
-    return;
+    return <AadhaarLoader />;
   }
 
   return (
     <div className={styles.container}>
       <div className={`${styles.navigateBack}`}>
         <button
-          onClick={() => navigate(`/assign?type=${type}/`)}
+          onClick={() => navigate(`/assign?type=${type}`)}
           className={`${styles.arrowBtn} `}
         >
           <ArrowLeft size={28} />
@@ -78,7 +73,7 @@ function FingerprintViewer() {
       <div className={styles.controls}>
         <button
           className={styles.backBtn}
-          onClick={() => navigate(`/assign?type=${type}/`)}
+          onClick={() => navigate(`/assign?type=${type}`)}
         >
           Back To Dashboard
         </button>

@@ -100,7 +100,17 @@ const CreateOrder = () => {
       "pincode",
     ];
     if (numericOnlyFields.includes(name)) {
-      const numericValue = value.replace(/\D/g, "");
+      let numericValue = value.replace(/\D/g, "");
+
+      if (name === "aadhaarNumber" || name === "fatherAadhaarNumber") {
+        numericValue = numericValue.slice(0, 12);
+      }
+      if (name === "mobileNumber") {
+        numericValue = numericValue.slice(0, 10);
+      }
+      if (name === "pincode") {
+        numericValue = numericValue.slice(0, 6);
+      }
       setFormData((prev) => ({
         ...prev,
         [name]: numericValue,
@@ -125,13 +135,11 @@ const CreateOrder = () => {
         alert(res.data.ErrorDescription);
         return;
       }
-      const { BitmapData, AnsiTemplate } = res.data;
-
+      const { BitmapData, AnsiTemplate, Quality } = res.data;
       setFingerprints((prev) => ({
         ...prev,
-        [finger]: { BitmapData, AnsiTemplate },
+        [finger]: { BitmapData, AnsiTemplate, Quality },
       }));
-      console.log("fingerprints", fingerprints);
     } catch (err) {
       alert("Failed to capture.");
     }
@@ -169,6 +177,35 @@ const CreateOrder = () => {
         errors[field] = "This field is required";
       }
     }
+
+    if (formData.aadhaarNumber && formData.aadhaarNumber.length !== 12) {
+      errors.aadhaarNumber = "Aadhaar number must be exactly 12 digits";
+    }
+
+    // Mobile validation
+    if (formData.mobileNumber && formData.mobileNumber.length < 10) {
+      errors.mobileNumber = "Mobile number must be at least 10 digits";
+    }
+
+    // Father Aadhaar validation (for child enrollment)
+    if (
+      orderType === "child" &&
+      formData.fatherAadhaarNumber &&
+      formData.fatherAadhaarNumber.length !== 12
+    ) {
+      errors.fatherAadhaarNumber = "Father's Aadhaar number must be 12 digits";
+    }
+
+    // Pincode validation (optional)
+    if (formData.pincode && formData.pincode.length !== 6) {
+      errors.pincode = "Pincode must be 6 digits";
+    }
+    const hasFingerprint = Object.values(fingerprints).some(
+      (fp) => fp !== null
+    );
+    if (!hasFingerprint) {
+      errors.fingerprints = "At least one fingerprint is required";
+    }
     return errors;
   };
   const handleSubmit = async (e) => {
@@ -178,8 +215,14 @@ const CreateOrder = () => {
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
-      setFormData(formData);
-      alert("Please fill all required fields.");
+      const firstErrorField = Object.keys(errors)[0];
+      const el = document.querySelector(`[name="${firstErrorField}"]`);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.focus();
+      }
+      // setFormData(formData);
+      // alert("Please fill all required fields.");
       setIsSubmitting(false);
       return;
     }
@@ -224,8 +267,6 @@ const CreateOrder = () => {
       if (Object.keys(fingerprintData).length > 0) {
         formDataToSend.append("fingerprints", JSON.stringify(fingerprintData));
       }
-      console.log("formdata", formDataToSend);
-      console.log("fingerprintdata", fingerprintData);
       const response = await api.post("/orders/", formDataToSend);
 
       if (response.status === 400) {
@@ -233,9 +274,8 @@ const CreateOrder = () => {
       } else {
         setFormErrors("Submission failed. Please try again later.");
       }
-
       toast.success("Order created successfully!");
-      navigate(`/assign?type=${orderType}/`);
+      navigate(`/assign?type=${orderType}`);
     } catch (error) {
       console.error("Error creating order:", error);
       if (error.response) {
@@ -271,6 +311,9 @@ const CreateOrder = () => {
                   value={formData.fullName}
                   onChange={handleInputChange}
                 />
+                {formErrors.fullName && (
+                  <span className={styles.error}>{formErrors.fullName}</span>
+                )}
               </div>
               <div className={styles.formGroup}>
                 <label className={styles.label}>Father's Name</label>
@@ -295,6 +338,11 @@ const CreateOrder = () => {
                   value={formData.aadhaarNumber}
                   onChange={handleInputChange}
                 />
+                {formErrors.aadhaarNumber && (
+                  <span className={styles.error}>
+                    {formErrors.aadhaarNumber}
+                  </span>
+                )}
               </div>
             </div>
             <div className={styles.formRow}>
@@ -310,6 +358,11 @@ const CreateOrder = () => {
                   value={formData.mobileNumber}
                   onChange={handleInputChange}
                 />
+                {formErrors.mobileNumber && (
+                  <span className={styles.error}>
+                    {formErrors.mobileNumber}
+                  </span>
+                )}
               </div>
               <div className={styles.formGroup}>
                 <label className={styles.label}>Email Id</label>
@@ -666,7 +719,7 @@ const CreateOrder = () => {
               >
                 {fingerprints[finger] ? (
                   <img
-                    src={`data:image/bmp;base64,${fingerprints[finger].bitmap}`}
+                    src={`data:image/bmp;base64,${fingerprints[finger].BitmapData}`}
                     alt={`Finger ${i + 1}`}
                     className={styles.fingerprintPreview}
                   />
@@ -674,6 +727,11 @@ const CreateOrder = () => {
                   <div className={styles.checkmark}>✓</div>
                 )}
               </div>
+              {fingerprints[finger] && (
+                <div className={styles.qualityText}>
+                  Quality: {fingerprints[finger].Quality || "f"}
+                </div>
+              )}
               <button
                 type="button"
                 className={styles.fingerprintButton}
@@ -683,6 +741,9 @@ const CreateOrder = () => {
               </button>
             </div>
           ))}
+          {formErrors.fingerprints && (
+            <div className={styles.error}>{formErrors.fingerprints}</div>
+          )}
         </div>
         {/* Submit button */}
         <button

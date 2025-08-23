@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api, { getCookie } from "../utils/api";
+import api from "../utils/api";
 
 const AuthContext = createContext();
 
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
       }
     };
     fetchUser();
-  }, [navigate]);
+  }, []);
 
   const login = async (username, password) => {
     try {

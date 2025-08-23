@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import styles from "../styles/Login.module.css";
 import { useAuth } from "../context/AuthContext";
@@ -7,16 +7,19 @@ import AadhaarLoader from "../pages/Loader";
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, login, loading } = useAuth();
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const from = location.state?.from?.pathname || "/dashboard";
+
   useEffect(() => {
     if (!loading && user) {
-      navigate("/dashboard");
+      navigate(from, { replace: true });
     }
-  }, [user, loading, navigate]);
+  }, [user, loading, navigate, from]);
 
   if (loading) return <AadhaarLoader />;
   if (user) return null;

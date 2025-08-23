@@ -7,7 +7,9 @@ export async function initCSRF() {
   try {
     const res = await axios.get(
       "https://aadhar-vault-backend.onrender.com/api/csrf/",
-      { withCredentials: true }
+      {
+        withCredentials: true,
+      }
     );
 
     csrfToken = res.data.csrfToken;
@@ -20,7 +22,7 @@ export async function initCSRF() {
 
 // Axios instance
 const api = axios.create({
-  baseURL: "https://aadhar-vault-backend.onrender.com/api/",
+  baseURL: "https://https://aadhar-vault-backend.onrender.com/api/",
   withCredentials: true,
 });
 
@@ -29,7 +31,6 @@ api.interceptors.request.use(async (config) => {
   const safeMethods = ["get", "head", "options", "trace"];
   if (!safeMethods.includes(config.method)) {
     if (!csrfToken) {
-      throw new Error("CSRF token not initialized! Call initCSRF() first.");
       await initCSRF();
     }
     config.headers["X-CSRFToken"] = csrfToken;
