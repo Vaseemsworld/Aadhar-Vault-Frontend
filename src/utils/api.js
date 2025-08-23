@@ -22,7 +22,7 @@ export async function initCSRF() {
 
 // Axios instance
 const api = axios.create({
-  baseURL: "https://https://aadhar-vault-backend.onrender.com/api/",
+  baseURL: "https://aadhar-vault-backend.onrender.com/api/",
   withCredentials: true,
 });
 
