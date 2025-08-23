@@ -41,7 +41,10 @@ export default function Layout() {
       setHeading("Entry Complaint");
     } else if (currentPath === "Profile") {
       setHeading("Profile");
+    } else if (currentPath === "Operators") {
+      setHeading("Operators");
     }
+    console.log("currentPath:", currentPath);
   }, [currentPath]);
 
   const getGreeting = () => {
@@ -129,7 +132,11 @@ export default function Layout() {
           >
             <div className={styles.dashboardHeader}>
               {/* <div className={styles.contentHeader}> */}
-              {user.is_staff ? <h1>Operators</h1> : <h1>Dashboard</h1>}
+              {currentPath === "Operators" ? (
+                <h1>Operators</h1>
+              ) : (
+                <h1>Dashboard</h1>
+              )}
               {/* <h1>{title}</h1> */}
               <span className={styles.subtitle}>
                 Control Panel - {getGreeting()}
