@@ -93,7 +93,12 @@ export default function Layout() {
               <span className={styles.username}>Aadhar Vault</span>
             </a>
             {showDropdown && (
-              <div className={styles.dropdown} ref={dropdownRef}>
+              <div
+                className={`${styles.dropdown} ${
+                  showDropdown ? styles.show : ""
+                }`}
+                ref={dropdownRef}
+              >
                 <div className={styles.profileInfo}>
                   <img className={styles.avatar} src={avatar} alt="image" />
                   <div className={styles.username}>Aadhar Vault</div>

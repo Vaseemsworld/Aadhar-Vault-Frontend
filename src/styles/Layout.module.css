@@ -78,8 +78,11 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
-
+.navProfile:hover .username {
+  text-decoration: underline;
+}
 .dropdown {
   height: 200px;
   width: 250px;
@@ -92,6 +95,17 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45),
     0 4px 12px rgba(167, 139, 250, 0.4);
+
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.dropdown.show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
 }
 .dropdown .profileInfo {
   background-color: #6f42c1;
@@ -229,7 +243,7 @@
 @media (max-width: 768px) {
   .contentWrapper {
     margin-left: 230px;
-    padding: 5px;
+    padding: 15px;
   }
 
   .contentWrapper.sidebarClosed {

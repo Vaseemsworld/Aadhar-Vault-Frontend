@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      await api.get("csrf/");
       await api.post("register/", userData);
       navigate("login/");
     } catch (err) {
