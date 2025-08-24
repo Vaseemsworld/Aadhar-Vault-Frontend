@@ -163,7 +163,7 @@ export default function Layout() {
             !isSidebarOpen && styles.sidebarClosed
           }`}
         >
-          <p>Copyright © 2024 Aadhar Vault</p>
+          <p>Copyright © 2025 Aadhar Vault</p>
           <p>
             Developed by{" "}
             <a

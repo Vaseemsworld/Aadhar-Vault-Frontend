@@ -108,7 +108,7 @@ export default function Operators() {
               <p className={styles.noData}>No operators found.</p>
             ) : (
               <table className={styles.table}>
-                <thead>
+                <thead className={styles.thead}>
                   <tr>
                     <th>#</th>
                     <th>Username</th>
