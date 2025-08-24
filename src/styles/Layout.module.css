@@ -207,7 +207,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: all 0.3s ease;
 }
 .footer a {
   font-size: 1.02rem;
@@ -220,13 +219,10 @@
 
 /* Responsive Design */
 @media (min-width: 768.1px) {
-  .contentWrapper .footer {
+  .contentWrapper {
     margin-left: 230px;
   }
   .contentWrapper.sidebarClosed {
-    margin-left: 70px;
-  }
-  .contentWrapper.sidebarClosed ~ .footer {
     margin-left: 70px;
   }
 }
@@ -235,13 +231,8 @@
     margin-left: 230px;
     padding: 5px;
   }
-  .footer {
-    margin-left: 230px;
-  }
+
   .contentWrapper.sidebarClosed {
-    margin-left: 0;
-  }
-  .contentWrapper.sidebarClosed ~ .footer {
     margin-left: 0;
   }
 }
