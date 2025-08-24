@@ -80,11 +80,9 @@
   cursor: pointer;
 }
 .navProfile .profile .username {
-  text-decoration: none;
   transition: all 0.3s ease;
 }
-.navProfile:hover .username {
-  text-decoration: underline;
+.navProfile .profile:hover .username {
   color: #f9f871;
 }
 .dropdown {
@@ -240,10 +238,12 @@
 }
 /* Responsive Design */
 @media (min-width: 768.1px) {
-  .contentWrapper {
+  .contentWrapper,
+  .footer {
     margin-left: 230px;
   }
-  .contentWrapper.sidebarClosed {
+  .contentWrapper.sidebarClosed,
+  .footer.sidebarClosed {
     margin-left: 70px;
   }
 }
@@ -255,5 +255,11 @@
 
   .contentWrapper.sidebarClosed {
     margin-left: 0;
+  }
+  .footer {
+    margin-left: 0;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
   }
 }

@@ -92,35 +92,34 @@ export default function Layout() {
               <img className={styles.avatar} src={avatar} alt="image" />
               <span className={styles.username}>Aadhar Vault</span>
             </a>
-            {showDropdown && (
-              <div
-                className={`${styles.dropdown} ${
-                  showDropdown ? styles.show : ""
-                }`}
-                ref={dropdownRef}
-              >
-                <div className={styles.profileInfo}>
-                  <img className={styles.avatar} src={avatar} alt="image" />
-                  <div className={styles.username}>Aadhar Vault</div>
-                </div>
-                <div className={styles.buttons}>
-                  <button
-                    className={styles.button}
-                    style={{ right: "10px" }}
-                    onClick={() => navigate("/profile")}
-                  >
-                    Profile
-                  </button>
-                  <button
-                    className={styles.button}
-                    style={{ left: "10px" }}
-                    onClick={() => logout()}
-                  >
-                    Sign out
-                  </button>
-                </div>
+
+            <div
+              className={`${styles.dropdown} ${
+                showDropdown ? styles.show : ""
+              }`}
+              ref={dropdownRef}
+            >
+              <div className={styles.profileInfo}>
+                <img className={styles.avatar} src={avatar} alt="image" />
+                <div className={styles.username}>Aadhar Vault</div>
               </div>
-            )}
+              <div className={styles.buttons}>
+                <button
+                  className={styles.button}
+                  style={{ right: "10px" }}
+                  onClick={() => navigate("/profile")}
+                >
+                  Profile
+                </button>
+                <button
+                  className={styles.button}
+                  style={{ left: "10px" }}
+                  onClick={() => logout()}
+                >
+                  Sign out
+                </button>
+              </div>
+            </div>
           </div>
         </nav>
       </header>
@@ -159,7 +158,11 @@ export default function Layout() {
         </main>
 
         {/* Footer */}
-        <footer className={styles.footer}>
+        <footer
+          className={`${styles.footer} ${
+            !isSidebarOpen && styles.sidebarClosed
+          }`}
+        >
           <p>Copyright © 2024 Aadhar Vault</p>
           <p>
             Developed by{" "}
