@@ -79,7 +79,7 @@
   align-items: center;
   cursor: pointer;
 }
-.navProfile .profile {
+.navProfile .profile .username {
   text-decoration: none;
   transition: all 0.3s ease;
 }
@@ -229,12 +229,15 @@
 .footer a {
   font-size: 1.02rem;
   color: #ffffff;
+  transition: all 0.3s ease;
 }
 .footer p {
   margin: 0;
   font-size: 14px;
 }
-
+.footer a:hover {
+  color: #f9f871;
+}
 /* Responsive Design */
 @media (min-width: 768.1px) {
   .contentWrapper {

@@ -87,10 +87,6 @@ const ProfileDashboard = () => {
             </div>
           </div>
 
-          <button className={styles.updateBtn} onClick={handleUpdateProfile}>
-            Update Profile
-          </button>
-
           <div className={styles.aboutSection}>
             <h3>About Me</h3>
             <div className={styles.aboutItem}>
@@ -285,6 +281,12 @@ const ProfileDashboard = () => {
                   />
                 </div>
               </div>
+              <button
+                className={styles.updateBtn}
+                onClick={handleUpdateProfile}
+              >
+                Update Profile
+              </button>
             </div>
           )}
 
