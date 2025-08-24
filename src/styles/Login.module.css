@@ -3,16 +3,26 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #f3f4f6;
+  /* background: #f3f4f6; */
   font-family: system-ui, sans-serif;
+
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0.6)
+    ),
+    /* transparent white overlay */
+      url("/frontend/public/login_background.jpeg") no-repeat center center;
+  background-size: cover;
 }
 
 .box {
+  position: relative;
+  z-index: 2;
   width: 320px;
   background: #fff;
   padding: 2rem;
   border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {

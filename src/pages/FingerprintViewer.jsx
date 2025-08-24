@@ -132,7 +132,7 @@ function FingerprintViewer() {
       <button
         onClick={() => {
           setBrightness(1);
-          setZoom(1);
+          setZoom(0.8);
         }}
         className={styles.resetBtn}
       >

@@ -140,7 +140,7 @@ export default function Operators() {
             {showDelete && (
               <div className={styles.warningBox}>
                 <div className={styles.deleteContainer}>
-                  <p>Are you sure you want to delete this entry?</p>
+                  <p>Are you sure you want to delete this Operator?</p>
                   <div className={styles.btns}>
                     <button
                       className={styles.cancelBtn}

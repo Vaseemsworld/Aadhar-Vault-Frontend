@@ -103,9 +103,9 @@ export default function Login() {
           </p>
         )}
 
-        <p className={styles.switch}>
+        {/* <p className={styles.switch}>
           No account? <Link to="/register">Register</Link>
-        </p>
+        </p> */}
       </form>
     </div>
   );
