@@ -223,6 +223,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: all 0.3s ease;
 }
 .footer a {
   font-size: 1.02rem;
@@ -253,9 +254,7 @@
     padding: 15px;
   }
 
-  .contentWrapper.sidebarClosed {
-    margin-left: 0;
-  }
+  .contentWrapper.sidebarClosed,
   .footer {
     margin-left: 0;
   }
@@ -263,6 +262,7 @@
 
 @media (max-width: 480px) {
   .footer {
+    margin-left: 0;
     flex-direction: column;
     gap: 8px;
     text-align: center;
