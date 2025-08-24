@@ -16,6 +16,8 @@
   align-items: center;
   background: rgba(111, 66, 193, 0.8);
   backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45),
+    0 4px 12px rgba(167, 139, 250, 0.4);
   padding: 0 20px;
   color: white;
 }
@@ -86,6 +88,10 @@
   right: 10px;
   text-align: center;
   cursor: default;
+  background: rgba(111, 66, 193, 0.8);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45),
+    0 4px 12px rgba(167, 139, 250, 0.4);
 }
 .dropdown .profileInfo {
   background-color: #6f42c1;
