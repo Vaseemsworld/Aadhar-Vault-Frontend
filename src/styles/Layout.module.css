@@ -78,10 +78,14 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+.navProfile .profile {
+  text-decoration: none;
   transition: all 0.3s ease;
 }
 .navProfile:hover .username {
   text-decoration: underline;
+  color: #f9f871;
 }
 .dropdown {
   height: 200px;

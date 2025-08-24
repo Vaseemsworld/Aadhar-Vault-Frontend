@@ -80,7 +80,8 @@
   cursor: pointer;
   transition: color 0.2s ease;
 }
-.username:hover {
+.username:hover,
+.footer a:hover {
   color: #f9f871;
 }
 
@@ -203,6 +204,7 @@
   font-weight: 500;
   text-decoration: none;
   color: #cfd2ff;
+  transition: all 0.3s ease;
 }
 .submenu li a:hover {
   background: rgba(255, 255, 255, 0.08);

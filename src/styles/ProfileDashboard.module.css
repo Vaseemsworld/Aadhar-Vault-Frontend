@@ -104,10 +104,13 @@
   margin: 20px 0;
   width: 100%;
   font-weight: 500;
+  opacity: 1;
+  transition: all 0.3s ease;
 }
 
 .updateBtn:hover {
   opacity: 0.9;
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
 }
 
 .aboutSection {
@@ -155,6 +158,7 @@
   font-size: 14px;
   color: #666;
   border-bottom: 2px solid transparent;
+  transition: all 0.8s ease;
 }
 
 .tab.active {
