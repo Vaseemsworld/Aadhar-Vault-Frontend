@@ -10,8 +10,7 @@
       rgba(255, 255, 255, 0.6),
       rgba(255, 255, 255, 0.6)
     ),
-    /* transparent white overlay */ url("../assets/login_background.jpeg")
-      no-repeat center center;
+    url("../assets/login_background.jpeg") no-repeat center center;
   background-size: cover;
 }
 
@@ -19,10 +18,10 @@
   position: relative;
   z-index: 2;
   width: 320px;
-  background: #fff;
+  background: rgba(red, green, blue, 0);
   padding: 2rem;
   border-radius: 6px;
-  box-shadow: 0 4px 8px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .title {
@@ -39,21 +38,23 @@
   border: 1px solid #d1d5db;
   border-radius: 4px;
   font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .button {
   width: 100%;
   padding: 0.5rem;
-  background: #4f46e5;
   color: #fff;
   border: none;
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
+  background: rgba(79, 70, 229, 0.8);
+  transition: all 0.3 ease;
 }
 
 .button:hover {
-  opacity: 0.9;
+  background: rgba(79, 70, 229, 1);
 }
 
 .switch {
