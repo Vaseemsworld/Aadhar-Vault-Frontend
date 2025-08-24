@@ -10,8 +10,8 @@
       rgba(255, 255, 255, 0.6),
       rgba(255, 255, 255, 0.6)
     ),
-    /* transparent white overlay */
-      url("/frontend/public/login_background.jpeg") no-repeat center center;
+    /* transparent white overlay */ url("../assets/login_background.jpeg")
+      no-repeat center center;
   background-size: cover;
 }
 
