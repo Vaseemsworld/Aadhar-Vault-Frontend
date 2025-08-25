@@ -18,7 +18,7 @@ function FingerprintViewer() {
   const [fingerprints, setFingerprints] = useState({});
   const [index, setIndex] = useState(0);
   const [brightness, setBrightness] = useState(1);
-  const [zoom, setZoom] = useState(0.8);
+  const [zoom, setZoom] = useState(0.6);
   const [loading, setLoading] = useState(true);
   const [aadhaarNumber, setAadhaarNumber] = useState("");
   const [name, setName] = useState("");
@@ -96,7 +96,7 @@ function FingerprintViewer() {
         <button onClick={() => setZoom((z) => z + 0.2)}>
           <ZoomIn size={18} />
         </button>
-        <button onClick={() => setZoom((z) => Math.max(0.5, z - 0.2))}>
+        <button onClick={() => setZoom((z) => Math.max(0.2, z - 0.2))}>
           <ZoomOut size={18} />
         </button>
       </div>
@@ -132,7 +132,7 @@ function FingerprintViewer() {
       <button
         onClick={() => {
           setBrightness(1);
-          setZoom(0.8);
+          setZoom(0.6);
         }}
         className={styles.resetBtn}
       >
